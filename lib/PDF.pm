@@ -1,5 +1,8 @@
 class PDF;
 
-sub encode($type) {
-	
+method encode($type, $value) {
+	given $type {
+		when 'null' { return $value }
+		default { die "Invalid type '$type'" }
+	};
 }
