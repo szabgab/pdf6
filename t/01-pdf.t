@@ -9,31 +9,38 @@ use PDF;
 #$pdf.save('out.pdf');
 
 
+my @cases = (
+	[Mu, 'null'],
+	['anything', 'null', 'anything'], # any value
+
+	[Mu, 'number'],
+	['value', 'number', 'value'],     # any value
+
+	["\n",  'cr'],
+	["\n",  'cr', 'abc'],             # TODO: probably should complain that a 2nd, unnecesssary param was given
+
+	['true', 'boolean', 'true'],
+	['false', 'boolean', 'false'],
+	['false', 'boolean', '0'],
+	['true', 'boolean', '42'],        # any other value as the 3rd item
+#	['true', 'boolean', undef],       # TODO: give error or eliminate warnings
+
+	['any string', 'verbatim', 'any string'],  # anything
+	['x', 'verbatim', 'x'],                    # anything
+#	[undef, 'verbatim', undef],  # TODO should give error, now fails with unknown type as the do{} fails
+#	[0, 'verbatim', 0],          # TODO should work?, now fails with unknown type as the do{} fails
+
+ 
+	['(any string)', 'string', 'any string'],  # anything
+	['(x)', 'string', 'x'],                    # anything
+#	['()', 'string', Mu],  # TODO what should happen? eliminate warnings 
+	['(0)', 'string', 0],
+
+
+);
+
 #say @cases.perl;
-#  
-	#  [undef, 'number'],
-	#  ['value', 'number', 'value'],     # any value
-#  
-	#  ["\n",  'cr'],
-	#  ["\n",  'cr', 'abc'],             # TODO: probably should complain that a 2nd, unnecesssary param was given
-#  
-	#  ['true', 'boolean', 'true'],
-	#  ['false', 'boolean', 'false'],
-	#  ['false', 'boolean', '0'],
-	#  ['true', 'boolean', '42'],        # any other value as the 3rd item
-#  #	['true', 'boolean', undef],       # TODO: give error or eliminate warnings
-#  
-	#  ['any string', 'verbatim', 'any string'],  # anything
-	#  ['x', 'verbatim', 'x'],                    # anything
-#  #	[undef, 'verbatim', undef],  # TODO should give error, now fails with unknown type as the do{} fails
-#  #	[0, 'verbatim', 0],          # TODO should work?, now fails with unknown type as the do{} fails
-#  
-#  
-	#  ['(any string)', 'string', 'any string'],  # anything
-	#  ['(x)', 'string', 'x'],                    # anything
-	#  ['()', 'string', undef],  # TODO what should happen? eliminate warnings 
-	#  ['(0)', 'string', 0],
-#  
+
 #  
 	#  # TODO: shouldn't this check if the given value was indeed a number?
 	#  ['any string', 'number', 'any string'],  # anything
@@ -83,10 +90,6 @@ use PDF;
 #  
 #  
 
-my @cases = (
-	[Mu, 'null'],
-	['anything', 'null', 'anything'], # any value
-);
 
 plan @cases.elems;
 #say @cases.perl;
