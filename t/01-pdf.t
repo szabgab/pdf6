@@ -13,8 +13,13 @@ my @cases = (
 	[Mu, 'null'],
 	['anything', 'null', 'anything'], # any value
 
+	# TODO: shouldn't this check if the given value was indeed a number?
 	[Mu, 'number'],
 	['value', 'number', 'value'],     # any value
+	['any string', 'number', 'any string'],  # anything
+	['x', 'number', 'x'],                    # anything
+#	[Mu, 'number', Mu],                      # TODO eliminate warnings
+	[0, 'number', 0],
 
 	["\n",  'cr'],
 	["\n",  'cr', 'abc'],             # TODO: probably should complain that a 2nd, unnecesssary param was given
@@ -36,34 +41,27 @@ my @cases = (
 #	['()', 'string', Mu],  # TODO what should happen? eliminate warnings 
 	['(0)', 'string', 0],
 
+	['/any string', 'name', 'any string'],  # anything
+	['/x', 'name', 'x'],                    # anything
+#	['/', 'name', Mu],  # TODO ???, eliminate warnings
+	['/0', 'name', 0],
+	
+
+	['[/anything]', 'array', [ 
+			['name', 'anything'],
+		] 
+	],
+	['[/42 abc]', 'array', [ 
+			['name', 42],
+			['verbatim', 'abc'],
+		] 
+	],
+
 
 );
 
 #say @cases.perl;
 
-#  
-	#  # TODO: shouldn't this check if the given value was indeed a number?
-	#  ['any string', 'number', 'any string'],  # anything
-	#  ['x', 'number', 'x'],                    # anything
-	#  [undef, 'number', undef],  # TODO eliminate warnngs
-	#  [0, 'number', 0],
-#  
-#  
-	#  ['/any string', 'name', 'any string'],  # anything
-	#  ['/x', 'name', 'x'],                    # anything
-	#  ['/', 'name', undef],  # TODO ???, eliminate warnings
-	#  ['/0', 'name', 0],
-	#  
-	#  ['[/anything]', 'array', [ 
-			#  ['name', 'anything'],
-		#  ] 
-	#  ],
-	#  ['[/42 abc]', 'array', [ 
-			#  ['name', 42],
-			#  ['verbatim', 'abc'],
-		#  ] 
-	#  ],
-#  
 	#  # TODO more complex test cases for dictionary
 	#  ["<<\n/42 /text\n/abc (qwe)\n>>", 'dictionary', {
 			#  42 => ['name', 'text'],
