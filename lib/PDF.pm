@@ -27,6 +27,17 @@ method encode($type, $value) {
 			#say $s;
 			return $s;
 		}
+		when 'dictionary' {
+			my $s = "<<\n";
+			# for my $v ( keys %$val ) {
+			#$s ~= self.encode( 'name', $v ) ~ " ";
+			#$s ~= self.encode( ${ $$val{$v} }[0], ${ $$val{$v} }[1] );
+			$s ~= "\n";
+			# }
+			$s ~= ">>";
+			return $s;
+		}
+
 		default { die "Invalid type '$type'" }
 	};
 }

@@ -57,18 +57,18 @@ my @cases = (
 		] 
 	],
 
+	# TODO more complex test cases for dictionary
+	["<<\n/42 /text\n/abc (qwe)\n>>", 'dictionary', {
+			42 => ['name', 'text'],
+			abc => ['string', 'qwe'],
+		}
+	],
+
 
 );
 
 #say @cases.perl;
 
-	#  # TODO more complex test cases for dictionary
-	#  ["<<\n/42 /text\n/abc (qwe)\n>>", 'dictionary', {
-			#  42 => ['name', 'text'],
-			#  abc => ['string', 'qwe'],
-		#  }
-	#  ],
-#  
 	#  # TODO more complex test cases for object
 	#  ["abc 42 obj\n/qwe\nendobj", 'object', [
 		#  'abc', 42, ['name', 'qwe']
